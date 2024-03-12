@@ -3,7 +3,6 @@ import { Text, SafeAreaView, StyleSheet } from "react-native";
 const FallbackComponent = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Oops</Text>
       <Text style={styles.header}>An unexpected error occurred</Text>
     </SafeAreaView>
   );

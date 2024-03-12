@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 import ErrorBoundary from "react-native-error-boundary";
-import FallbackComponent from "./components/ErrorFallbackComponent";
-import ComponentThatThrowsError from "./components/ComponentThatThrowsError";
+import FallbackComponent from "./components/FallBackComponent";
+import ErrorComponent from "./components/ErrorComponent";
 
 const App = () => {
   const [showError, setShowError] = useState(false);
@@ -21,7 +21,7 @@ const App = () => {
             setShowError(true);
           }}
         />
-        {showError && <ComponentThatThrowsError />}
+        {showError && <ErrorComponent />}
       </View>
     </ErrorBoundary>
   );
