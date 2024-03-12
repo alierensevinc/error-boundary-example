@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import ErrorBoundary from "react-native-error-boundary";
+import FallbackComponent from "./components/ErrorFallbackComponent";
+import ComponentThatThrowsError from "./components/ComponentThatThrowsError";
 
-export default function App() {
+const App = () => {
+  const [showError, setShowError] = useState(false);
+
+  const handleError = (error, stackTrace) => {
+    console.log("error : ", error);
+    console.log("stackTrace : ", stackTrace);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ErrorBoundary onError={handleError} FallbackComponent={FallbackComponent}>
+      <View style={styles.container}>
+        <Button
+          title="Throw new Error"
+          onPress={() => {
+            setShowError(true);
+          }}
+        />
+        {showError && <ComponentThatThrowsError />}
+      </View>
+    </ErrorBoundary>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
+
+export default App;
